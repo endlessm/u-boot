@@ -25,6 +25,9 @@ const unsigned char default_environment[] = {
 #if defined(CONFIG_HKDK4412) && defined(CONFIG_EXYNOS_PRIME)
     "bootscript=source 40008000\0"
     "default_bootcmd=echo >>> Run Default Bootcmd <<<;movi read kernel 0 40008000;movi read rootfs 0 41000000 100000;bootm 40008000 41000000\0"
+    "loadbootenv=echo >>> Load Boot Script from mmc 0:1 <<<;ext4load mmc 0:1 40008000 uEnv.txt\0"
+    "importbootenv=echo >>> Importing environment from mmc 0:1 <<<;env import -t 40008000 ${filesize}\0"
+    "uenvbootcmd=ext4load mmc 0:1 0x40007000 ${kernel_image};ext4load mmc 0:1 0x42000000 ${ramdisk_image};bootm 0x40007000 0x42000000\0"
     "loadbootscript_1=echo >>> Load Boot Script from mmc 0:1 <<<;fatload mmc 0:1 40008000 boot.scr\0"
     "loadbootscript_2=echo >>> Load Boot Script from mmc 0:2 <<<;fatload mmc 0:2 40008000 boot.scr\0"
 #endif
