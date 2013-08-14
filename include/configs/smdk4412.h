@@ -273,15 +273,16 @@
 #if defined(CONFIG_HKDK4412) && defined(CONFIG_EXYNOS_PRIME)
     #define CONFIG_BOOTCOMMAND  \
         " mmc rescan 0:1; mmc rescan 0:2; "     \
-        " if run loadbootscript_1; "            \
-        "    then run bootscript; "             \
-        " else "                                \
-        "    if run loadbootscript_2; "         \
-        "        then run bootscript; "         \
-        "    else "                             \
-	"        run default_bootcmd; "         \
-        "    fi ;"                              \
-        " fi ; "                                
+        " if run loadbootenv; then " 		\
+        " 	run importbootenv;" 		\
+        " else " 				\
+        "  	if run loadbootscript_1; "      \
+        "     		then run bootscript; "  \
+        " 	else "				\
+        "         	run default_bootcmd; "  \
+        "     	 fi ;"                          \
+        " fi ; "				\
+        " run uenvbootcmd; "
         
     #define CONFIG_BOOTARGS	"fb_x_res=1280 fb_y_res=720 "       \
                             "hdmi_phy_res=720 "
