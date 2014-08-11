@@ -734,7 +734,8 @@ void pmic_init(void)
 		/* Audio: Set the EN32KHCP Register: For audio codec hp detection */
 		IIC0_EWrite(MAX77686_ADDR, 0x7f, 0x03);
 
-		/* Wifi/BT: LDO23 CTRL1 3.3 V*/
+		/* Wifi/BT: LDO21 & LDO23 CTRL1 3.3 V*/
+		IIC0_EWrite(MAX77686_ADDR, 0x54, 0xF2);
 		IIC0_EWrite(MAX77686_ADDR, 0x56, 0xF2);
 		/* Ethernet: LDO24 CTRL1 3.3 V*/
 		IIC0_EWrite(MAX77686_ADDR, 0x57, 0xF2);
