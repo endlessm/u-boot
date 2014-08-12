@@ -720,6 +720,31 @@ void pmic_init(void)
 		IIC0_EWrite(MAX77686_ADDR, 0x1E, CALC_MAXIM77686_BUCK234_VOLT(vdd_int * 1000));
 		/* VDD_G3D */
 		IIC0_EWrite(MAX77686_ADDR, 0x28, CALC_MAXIM77686_BUCK234_VOLT(vdd_g3d * 1000));
+
+#ifdef CONFIG_SQWERTY
+		/* Audio: LDO5 CTRL1 1.8 V */
+		IIC0_EWrite(MAX77686_ADDR, 0x44, 0xD4);
+		/* Audio: LDO9 CTRL1 1.8 V.. FIXME: not used on Sqwerty, disable? */
+		IIC0_EWrite(MAX77686_ADDR, 0x48, 0xD4);
+		/* Audio: LDO17 CTR:1 1/8V */
+		IIC0_EWrite(MAX77686_ADDR, 0x50, 0xD4);
+               /* Audio: LDO18 CTR:1 1/2V */
+               IIC0_EWrite(MAX77686_ADDR, 0x51, 0xC8);
+		/* HDMI/VGA: LDO25 3.3V */
+		IIC0_EWrite(MAX77686_ADDR, 0x58, 0xF2);
+		/* Audio: Set the EN32KHCP Register: For audio codec hp detection */
+		IIC0_EWrite(MAX77686_ADDR, 0x7f, 0x03);
+
+		/* Wifi/BT: LDO21 & LDO23 CTRL1 3.3 V*/
+		IIC0_EWrite(MAX77686_ADDR, 0x54, 0xF2);
+		IIC0_EWrite(MAX77686_ADDR, 0x56, 0xF2);
+		/* Ethernet: LDO24 CTRL1 3.3 V*/
+		IIC0_EWrite(MAX77686_ADDR, 0x57, 0xF2);
+
+		/*Set MRSTB Register: Program the Manual Reset ON/OFF and Debounce Timer*/
+		//IIC0_EWrite(MAX77686_ADDR, 0x0A, 0x08);
+		IIC0_EWrite(MAX77686_ADDR, 0x0A, 0x0F);  //set reset time to 10 sec
+#endif
 	}
 
 	GPA1PUD |= (0x5<<4);	// restore reset value: Pull Up/Down Enable SCL, SDA
