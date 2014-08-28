@@ -50,3 +50,12 @@ SUBDIRS	:= $(subdirs-y)
 $(obj).depend all:
 	@for dir in $(SUBDIRS) ; do \
 		$(MAKE) -C $$dir $@ ; done
+
+#########################################################################
+
+# defines $(obj).depend target
+include $(SRCTREE)/rules.mk
+
+sinclude $(obj).depend
+
+#########################################################################
