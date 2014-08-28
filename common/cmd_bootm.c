@@ -600,7 +600,7 @@ int do_bootm (cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 
 #ifdef CONFIG_ZIMAGE_BOOT
 #define LINUX_ZIMAGE_MAGIC	0x016f2818
-	image_header_t	*hdr;
+	image_header_t	*hdr = NULL;
 	ulong		addr;
 
 	/* find out kernel image address */
