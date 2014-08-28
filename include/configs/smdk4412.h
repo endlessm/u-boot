@@ -208,6 +208,8 @@
  ***********************************************************/
 #include <config_cmd_default.h>
 
+#define CONFIG_CMD_IMPORTENV
+
 #define CONFIG_CMD_PING
 
 #define CONFIG_CMD_USB
@@ -234,10 +236,6 @@
 #define CONFIG_FS_FAT
 #define CONFIG_CMD_FAT
 #define CONFIG_CMD_FS_GENERIC
-
-#define CONFIG_CMD_BOOTSCAN
-#define CONFIG_MENU
-#define CONFIG_MENU_SHOW
 
 #define CONFIG_SYS_NAND_QUIET_TEST
 #define CONFIG_SYS_ONENAND_QUIET_TEST
