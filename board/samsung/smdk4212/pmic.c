@@ -741,6 +741,10 @@ void pmic_init(void)
 		/* Ethernet: LDO24 CTRL1 3.3 V*/
 		IIC0_EWrite(MAX77686_ADDR, 0x57, 0xF2);
 
+		/* RAM: BUCK5 is set to 1.5V by hardware pins, but we increase to
+		 * 1.55V to avoid power noise. */
+		IIC0_EWrite(MAX77686_ADDR, 0x31, 0x10);
+
 		/*Set MRSTB Register: Program the Manual Reset ON/OFF and Debounce Timer*/
 		//IIC0_EWrite(MAX77686_ADDR, 0x0A, 0x08);
 		IIC0_EWrite(MAX77686_ADDR, 0x0A, 0x0F);  //set reset time to 10 sec
